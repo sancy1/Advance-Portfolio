@@ -1,0 +1,64 @@
+{% load static %}
+
+<section class="footer ">
+	<div class="container-fluid" style="width:95%;">
+		<div class="row">
+			<div class="col-lg-4 mr-auto col-md-12">
+				<div class="footer-widget widget mb-5 mb-lg-0">
+					<h3 class="mb-3 text-white">
+						<img src="{% static 'assets/images/footer.png' %}" alt="Alexander" 
+						class="img-fluid" style="width:160px; height:54px;">
+					</h3>
+					<p>
+						Transforming complex ideas into elegant software and web solutions with Python and Django expertise.
+						Delivering enterprise services tailored to your needs, ensuring user satisfaction.
+					</p>
+				</div>
+			</div>
+			<div class="col-lg-4 col-md-6">
+				<div class="footer-widget widget mb-5 mb-lg-0">
+					<h6 class="mb-4">Get In touch</h6>
+					<div class="footer-contact">
+						<h5>sanchez.alexander.cyril@gmail.com</h5>
+						<h5>+234-9022162214</h5>
+						<h5>53, CMD Road Magodo, Ikeja Lagos, Nigeria.</h5>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-6">
+				<div class="footer-widget widget">
+					<h6 class="mb-4">Follow Me</h6>
+					<ul class="list-inline footer-socials-icon mb-0">
+
+						{% include 'social_urls.html' %}
+
+						{% comment %} <li class="list-inline-item"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+						<li class="list-inline-item"><a href="#"><i class="fab fa-twitter"></i></a></li>
+						<li class="list-inline-item"><a href="#"><i class="fab fa-dribbble"></i></a></li>
+						<li class="list-inline-item"><a href="#"><i class="fab fa-behance"></i></a></li>
+						<li class="list-inline-item"><a href="#"><i class="fab fa-linkedin"></i></a></li> {% endcomment %}
+
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div class="footer-btm ">
+			<div class="row align-items-center">
+				<div class="col-lg-8">
+					<p class="mb-0"><a href="https://www.templateshub.net" target="_blank">Templates Hub</a></p>
+				</div>
+				<div class="col-lg-6">
+
+					{% include 'subscribe.html' %}
+					{% comment %} <form action="#" class="footer-subscribe mt-5 mt-lg-0">
+						<input type="text" class="form-control" placeholder="Email Address">
+						<i class="ti-email"></i>
+					</form> {% endcomment %}
+				</div>
+			</div>
+		</div>
+
+		
+	</div>
+</section>

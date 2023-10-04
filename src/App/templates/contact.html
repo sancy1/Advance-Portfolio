@@ -1,0 +1,108 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% load active_link_tags %}
+
+{{page_title}}
+
+{% block content %}
+
+{% include 'navbar.html' %}
+
+<div style="background:#;">
+	<section class="page-title bg-2" id="slider">
+		<div class="container-fluid" style="width:95%;">
+		  <div class="row align-items-center">
+			<div class="col-lg-7">
+				<h1> Let's Get started</h1>
+				<p>Hello there! I'm thrilled to see you on my contact page. If you have any questions, 
+					suggestions, or simply want to say hi, I'd love to hear from you. Your feedback 
+					matters to me, and I'm here to assist you in any way we can. Feel free to reach 
+					out using the contact form below, I'll get back to you as soon as possible.</p>
+			</div>
+	  
+			<div class="col-lg-5">
+			  <ul class="list-inline header-breadcumb text-lg-right mt-5 mt-lg-0">
+				<li class="list-inline-item"><a href="{% url 'home' %}">Home</a></li>
+				<li class="list-inline-item">/</li>
+				<li class="list-inline-item">Contact</li>
+			  </ul>
+			</div>
+		  </div>
+		</div>
+	  </section>
+
+
+
+<section class="section" id="slider" style="box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);">
+	<div class="container-fluid">
+		<div class="row justify-content-center">
+			<div class="col-lg-10">
+				<div class="section-title text-center">
+					<h2 class="mb-4 text-lg" style="margin-top:-80px;">Contact</h2>
+					{% comment %} <p>Hello there! I'm thrilled to see you on my contact page. If you have any questions, 
+						suggestions, or simply want to say hi, I'd love to hear from you. Your feedback 
+						matters to me, and I'm here to assist you in any way we can. Feel free to reach 
+						out using the contact form below, I'll get back to you as soon as possible.</p> {% endcomment %}
+				</div>
+			</div>
+		</div>
+
+		<div class="row justify-content-center">
+			<div class="col-lg-8">
+
+				<form method="post" class="form-row contact-form">
+					{% csrf_token %}
+					 
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="form-group">
+								<!--<label>Your Name</label>-->
+								<input type="text" id="name" name="name" class="form-control" placeholder="Enter Your Name" required>
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="form-group">
+								<!--<label>Your Phone</label>-->	
+								<input type="number" name="phone" id="phone" class="form-control" placeholder="Enter Your Phone" required>
+							</div>
+						</div>
+						
+						<div class="col-lg-6">
+							<div class="form-group">
+								<!--<label>Your Email</label>-->	
+								<input type="text" name="email" id="email" class="form-control" placeholder="Enter Your Email Address" required>
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="form-group">
+								<!--<label>Subject</label>-->
+								<input type="text" id="subject" name="subject" class="form-control" placeholder="Enter Your Subject" required>
+							</div>
+						</div>
+
+						<div class="col-lg-12">
+							<div class="form-group">
+								<!--<label>Your Message</label>-->	
+								<textarea id="message" name="message" cols="30" rows="8" class="form-control" placeholder="Your Message" required></textarea>	
+							</div>
+						</div>
+					</div>
+
+					<div class="col-lg-12">
+						<div class="d-lg-flex justify-content-between mt-4">
+							<p>* Rest assured. I'll not spam at your inbox.</p>
+							{% comment %} <a class="btn btn-primary btn-rounded" href="{% url 'contact' %}">Reset</a> {% endcomment %}
+							<input id="submit" name="submit" type="submit" class="btn btn-main btn-rounded" value="Send Message">
+						</div>
+					</div>
+				</form>	
+
+			</div>
+		</div>
+	</div>
+</section>
+
+{% include 'footer.html' %}
+
+{% endblock %}

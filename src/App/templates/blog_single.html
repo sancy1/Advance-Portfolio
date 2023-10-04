@@ -1,0 +1,335 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load active_link_tags %}
+{% load hitcount_tags %}
+
+{{page_title}}
+
+{% block content %}
+
+<style>
+    .saved1:hover{
+        color:#fd5f17;
+      }
+    .saved1{
+        color:#009900;
+    }
+    
+    .saved2:hover{
+        color:#fd5f17;
+    }
+    
+    .saved2{
+        color:#000;
+    }
+    
+    .saved3:hover{
+        color:#fd5f17;
+    }
+    
+    .saved4{
+        color:#000;
+    }
+    .saved4:hover{
+        color:#fd5f17;
+    }
+</style>
+
+
+{% include 'navbar.html' %}
+
+<section class="page-title bg-2" id="slider">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-7">
+            <h1>{{blog.cate_name}}</h1>
+            <p>{{blog.title}}</p>
+        </div>
+  
+        <div class="col-lg-5">
+          <ul class="list-inline header-breadcumb text-lg-right mt-5 mt-lg-0">
+            <li class="list-inline-item"><a href="{% url 'home' %}">Home</a></li>
+            <li class="list-inline-item">/</li>
+            <li class="list-inline-item"><a href="{% url 'blog' %}">Blog</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section class="blog-wrapper section">
+      <div class="container-fluid" style="width:95%;%">
+          <div class="row">
+              <div class="col-lg-8">
+                                  <div class="post post-single">
+                      <div class="post-thumb mb-4">
+                          <img class="img-fluid" src="{{blog.image.url}}" alt="">
+                      </div>
+  
+                      <ul class="list-inline post-tags">
+                          <li class="list-inline-item ">
+                              <a href="#">{{blog.cate_name}}</a>
+                          </li> 
+
+
+                          <!----------FAVOURITE------------>
+                          {% if request.user.is_authenticated %}
+                          {% if fav %}
+
+                          <li class="list-inline-item ">
+                            <a href="{% url 'favourite_list' %}">
+                            <span class="saved1" style="">
+                                <i class="fa fa-save" style="font-size:19px; font-weight:;"></i> 
+                                &nbsp; You saved this Post
+                            </span>
+                            </a>
+                        </li>
+
+
+                        <li class="list-inline-item ">
+                            <a href="{% url 'favourite_list' %}">
+                                <i class="fa fa-eye" style="font-size:19px; color:#fd5f17;"></i> 
+                                <span class="saved2" style="font-size:16px; color:#6e7797;"> &nbsp; View Saved Post</span>
+                            </a>
+                        </li>
+                        {% else %}
+
+
+                        <li class="list-inline-item ">
+                            <a href="{% url 'favourite_add' blog.id %}">
+                                {% comment %} <i class="fa fa-save" style="font-size:19px; color:#fd5f17;"></i> 
+                                View Saved Post {% endcomment %}
+                            <span>
+                                <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-bookmark-plus" fill="currentColor"
+                                xmlns="http://www.w3.org/2000/svg" style="color:#FF3D4F;">
+                                <path fill-rule="evenodd"
+                                    d="M4.5 2a.5.5 0 0 0-.5.5v11.066l4-2.667 4 2.667V8.5a.5.5 0 0 1 1 0v6.934l-5-3.333-5 3.333V2.5A1.5 1.5 0 0 1 4.5 1h4a.5.5 0 0 1 0 1h-4zm9-1a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1H13V1.5a.5.5 0 0 1 .5-.5z" />
+                                <path fill-rule="evenodd" d="M13 3.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0v-2z" />
+                                </svg>
+
+                                <span class="saved3"> &nbsp; Add to Favourite Post</span>
+                            </span>
+                            </a>
+                        </li>
+
+
+                        <li class="list-inline-item ">
+                            <a href="{% url 'favourite_list' %}">
+                                <i class="fa fa-eye" style="font-size:19px; color:#FF3D4F;"></i> 
+                                &nbsp;<span class="saved4" style="font-size:16px; color:#6e7797;"> View Saved Post</span>
+                            </a>
+                        </li>
+
+                        {% endif %}
+                        {% endif %}
+
+                        {% if not request.user.is_authenticated %}
+                        <li class="list-inline-item ">
+                            <a href="{% url 'favourite_list' %}">
+                                <i class="fa fa-exclamation-triangle" style="font-size:19px; color:#FF3D4F;"></i> 
+                                &nbsp;<span class="saved4" style="font-size:16px;"> Login in to add this Blog to Favourite Post</span>
+                            </a>
+                        </li>
+                        {% endif %}
+                      </ul>
+
+
+
+                      <h2 class="post-title">{{blog.title}}</h2>
+  
+                      <ul class="list-inline single-post-meta">
+                          <li class="list-inline-item">
+                              <a href="#"><img src="{{blog.author.profile_picture.url}}" style="width:40px; height:40px; border-radius:100px;"> 
+                                By {{blog.author}} Cyril</a>
+                          </li>
+                          <li class="list-inline-item">
+                              <i class="fa fa-calendar-check"></i>{{blog.created.date}}
+                          </li>
+                          <li class="list-inline-item">
+                            <i class="fa fa-clock"></i>{{blog.created.time}}
+                        </li>
+                        <li class="list-inline-item">
+                            <i class="fa fa-eye"></i>{% get_hit_count for blog %}
+                        </li>
+
+
+                          {% comment %} <li class="list-inline-item">
+                              <i class="ti-timer"></i>4 mins read
+                          </li> {% endcomment %}
+                      </ul>
+  
+                      <div class="post-content post-excerpt">
+                          <p>{{blog.overview|safe}}</p>
+                          
+                              <blockquote class="quote-post">
+                              <p>{{blog.highlight}}</p>
+                          </blockquote>
+  
+                          <p>{{blog.content1|safe}}</p>
+                          </div>
+  
+                          <div class="post-footer">
+                              <div class="single-post-meta d-flex justify-content-between">
+                                  
+                              </div>
+                          </div>
+                      </div>
+  
+                       <!--custom pagination-->
+                       <!--------PREVIOUS POST--------->
+                      <div class="custom-pagination custom-pagination-post">
+                          <div class="older full- d-lg-flex align-items-center">
+                            {% if previous_post %}
+                               <a href="{{previous_post.get_absolute_url}}" 
+                               class="prev-post-pagination">
+                               <h6><i class='fa fa-arrow-left'></i>&nbsp; Previous post 
+                            </h6>{{next_post|truncatechars:60}}</a>
+
+                            {% else %}
+                              <div class="next-post-pagination">
+                              <h6> Next post &nbsp;<i class="fa fa-arrow-right"></i></h6>
+                              <span style="color:#FF3D4F;">
+                                No available post. Click Next
+                            </span>
+                            </div>
+                            {% endif %}
+                          </div>
+                          <!--------END-PREVIOUS POST--------->
+
+                          
+                          <!--------NEXT POST--------->
+                          <div class="newer d-lg-flex align-items-center">
+                            {% if next_post %}
+                              <a href="{{next_post.get_absolute_url }}" 
+                              class="next-post-pagination">
+                              <h6> Next post &nbsp;<i class="fa fa-arrow-right"></i> 
+                              </h6>{{previous_post|truncatechars:60}}</a>
+                              
+                              {% else %}
+                              <div class="next-post-pagination">
+                              <h6> Next post &nbsp;<i class="fa fa-arrow-right"></i></h6>
+                              <span style="color:#FF3D4F;">
+                                No available post. Click previous
+                            </span>
+                            </div>
+                            {% endif %}
+                          </div>
+                           <!-------END-NEXT POST--------->
+                      </div>
+                          
+  
+              </div>
+              <div class="col-lg-4">
+                  <div class="sidebar">
+                      <div class="widget mb-5 mt-5 mt-lg-0">
+
+      <h5 class="widget-title">Search</h5>
+      <form action="{% url 'search_results' %}" class="search-form" role="search">
+        {% csrf_token %}
+          <input type="text" class="form-control"  name="q" placeholder="Search Blog...">
+          <button type="submit" class="btn btn-secondary mt-4">Search</button>
+      </form>
+  </div>
+  
+  {% comment %} <div class="widget mb-5">
+      <h5 class="widget-title">Social Links</h5>
+      <ul class="list-inline social-links mb-0">
+          <li class="list-inline-item">
+              <a href="#"><i class="ti-facebook"></i></a>
+          </li>
+          <li class="list-inline-item">
+              <a href="#"><i class="ti-twitter"></i></a>
+          </li>
+          <li class="list-inline-item">
+              <a href="#"><i class="ti-linkedin"></i></a>
+          </li>
+          <li class="list-inline-item">
+              <a href="#"><i class="ti-instagram"></i></a>
+          </li>
+          <li class="list-inline-item">
+              <a href="#"><i class="ti-dribbble"></i></a>
+          </li>
+      </ul>
+  </div> {% endcomment %}
+  
+  
+  <div class="widget mb-5">
+      <h5 class="widget-title">Recent Posts</h5>
+      <ul class="list-inline recent-posts mb-0">
+        {% for obj in recent_blog %}
+
+          <li class="list-inline-item d-lg-flex">
+              <div class="img-thumb">
+                <a href="{{obj.get_absolute_url}}">
+                    <img src="{{obj.image.url}}" alt=""  
+                    style="width:105px; height:105px; margin-top:10px;"></a>
+              </div>
+              <div class="post-block">
+                  {% comment %} <span class="text-sm">{{blog.publish}}</span> {% endcomment %}
+                  <h6><a href="{{obj.get_absolute_url}}">{{obj.title}}</a></h6>
+                  <span class="text-sm">{{blog.publish.date}}</span>
+              </div>
+          </li>
+          {% endfor %}
+      </ul>
+  </div>
+  
+  
+  
+  <div class="widget mb-5 widget-list-item">
+      <h5 class="widget-title">My Favourite Post</h5>
+      {% if user.is_authenticated %}
+      {% for obj in new %}
+      <ul class="list-unstyled mb-0">
+          <li><a href="{{obj.get_absolute_url}}">
+            <img src="{{obj.image.url}}" class="img-fluid"> {{obj.title}}</a>
+        </li>
+      </ul>
+      {% endfor %}
+      <a href="{% url 'favourite_list' %}" class="btn btn-dark">View All Favourite</a>
+      {% else %}
+      <ul class="list-unstyled mb-0">
+        <li>You have no Post in your Favourite </li>
+    </ul>
+    <a href="{% url 'favourite_list' %}" class="btn btn-dark">Signin / Signup to Add</a>
+    {% endif%}
+  </div>
+  
+  
+  
+  <div class="widget mb-5 widget-list-item">
+      <h5 class="widget-title">Categories</h5>
+
+      <ul class="list-unstyled mb-0">
+        {% for category in categories_with_counts %}
+
+        <li class="d-flex justify-content-between align-items-center">
+            <a href="/category/{{ category.name}}">{{category.name}}</a>
+          <span class=""> {{category.blog_count}} </span>
+        </li>
+        {% endfor %}
+      </ul>
+  </div>
+  
+  <div class="widget tags mb-5">
+      <h5 class="widget-title">Tags</h5>
+      <div class="tags-links">
+        {% for tag in blog.tags.all %}
+          <a href="{% url 'tag_blog' tag.name %}">{{ tag.name }}</a>
+          {% endfor %}
+      </div>
+  </div>
+  
+
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
+  
+  
+
+
+{% include 'footer.html' %}
+
+{% endblock %}

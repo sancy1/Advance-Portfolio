@@ -1,0 +1,210 @@
+
+{% extends 'base.html' %} {% load socialaccount %} {% providers_media_js %}
+{% load static %}
+{% load active_link_tags %}
+
+{{page_title}}
+
+{% block content %}
+
+  {% include 'navbar.html' %}
+
+
+<section class="page-title bg-2" id="slider">
+    <div class="container-fluid" style="width:95%;">
+      <div class="row align-items-center">
+        <div class="col-lg-7">
+            <h1>{{obj.title}}</h1>
+            <p>{{obj.title_summary}}</p>
+        </div>
+  
+        <div class="col-lg-5">
+          <ul class="list-inline header-breadcumb text-lg-right mt-5 mt-lg-0">
+            <li class="list-inline-item"><a href="{% url 'home' %}">Home</a></li>
+            <li class="list-inline-item">/</li>
+            <li class="list-inline-item">{{obj.title}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section class="section service-single">
+      <div class="container-fluid" style="width:95%;">
+          <div class="row">
+              <div class="col-lg-8">
+                  <div class="service-details">
+                      <img src="{{obj.image.url}}" alt="" class="img-fluid">
+                      <div class="details mt-4">
+  
+                          <!----DESCRIPTION / INTRODUCTION----->
+                          <div class="title mb-30">
+                              <h2>{{obj.main_title}}</h2>
+                          </div>
+                          <p>{{obj.introduction}}</p>
+  
+                      </div>
+                  </div>
+  
+  
+                  <!----KEY FEATURES----->
+                  <div class="process-wrap mt-5">
+                      <div class="title mb-30 ">
+                          <h2>Key Features</h2>
+                      </div>
+  
+                      <div class="row">
+                          <div class="col-lg-6">
+                              <div class="block mb-30">
+                                  <h5 class="mb-3"><span>01.</span>{{obj.key_features_1_title}}</h5>
+                                  <p>{{obj.key_features_1_summary}}</p>
+                              </div>
+                          </div>
+                          <div class="col-lg-6">
+                              <div class="block mb-30">
+                                  <h5 class="mb-3"><span>02.</span>{{obj.key_features_2_title}}</h5>
+                                  <p>{{obj.key_features_2_summary}}</p>
+                              </div>
+                          </div>
+                          <div class="col-lg-6">
+                               <div class="block mb-30">
+                                  <h5 class="mb-3"><span>03.</span>{{obj.key_features_3_title}}</h5>
+                                  <p>{{obj.key_features_3_summary}}</p>
+                              </div>
+                          </div>
+                          <div class="col-lg-6">
+                               <div class="block mb-30">
+                                  <h5 class="mb-3"><span>04.</span>{{obj.key_features_4_title}}</h5>
+                                  <p>{{obj.key_features_4_summary}}</p>
+                              </div>
+                          </div>
+                          <div class="col-lg-6">
+                            <div class="block mb-30">
+                               <h5 class="mb-3"><span>05.</span>{{obj.key_features_5_title}}</h5>
+                               <p>{{obj.key_features_5_summary}}</p>
+                           </div>
+                       </div>
+                       <div class="col-lg-6">
+                            <div class="block mb-30">
+                               <h5 class="mb-3"><span>06.</span>{{obj.key_features_6_title}}</h5>
+                               <p>{{obj.key_features_6_summary}}</p>
+                           </div>
+                       </div>
+                      </div>
+  
+  
+  
+                          <br>
+                          <!----HOW I WORKS----->
+                          <div class="title mb-30 ">
+                              <h2>How I works</h2>
+                              <p style="text-align: ;">{{obj.how_i_work_text}}</p>
+                        
+  
+                      
+                          <br>
+                          <!----DEVELOPMENT STRATEGY----->
+                              <h2>Development Strategy</h2>
+                              <div class="row" style="text-align: ;">
+                                  <div class="col-lg-6">
+                                      <div class="block mb-30">
+                                          <h5 class="mb-3"><span>01.</span>Consultation with Stakeholders</h5>
+                                          <p>This stage involves in-depth discussions with stakeholders to understand their project requirements, 
+                                              goals, and expectations. By actively engaging with clients, I gather valuable insights that shape 
+                                              the project's direction. This consultation phase enables me to define project scope, identify 
+                                              key features, and establish a clear roadmap for development.</p>
+                                      </div>
+                                  </div>
+                                  <div class="col-lg-6">
+                                      <div class="block mb-30">
+                                          <h5 class="mb-3"><span>02.</span>Research Hypothesis</h5>
+                                          <p>In this stage, I conduct comprehensive research to explore relevant technologies, frameworks, and 
+                                              solutions that align with the project's objectives. I formulate hypotheses and methodologies 
+                                              hat guide the development process. By identifying potential challenges and opportunities, 
+                                              I create a strong foundation for effective decision-making and solution design.
+                                          </p>
+                                      </div>
+                                  </div>
+                                  <div class="col-lg-6">
+                                       <div class="block mb-30">
+                                          <h5 class="mb-3"><span>03.</span>Design & Strategy Development</h5>
+                                          <p>Once armed with research findings, I move on to designing the project's architecture and user interfaces. 
+                                              With Python Django's capabilities, I create a robust backend structure that aligns with the project's 
+                                              scope and goals. This stage includes wireframing, prototyping, and mapping out user journeys. A clear 
+                                              design strategy emerges, focusing on user experience, functionality, and scalability.</p>
+                                      </div>
+                                  </div>
+                                  <div class="col-lg-6">
+                                       <div class="block mb-30">
+                                          <h5 class="mb-3"><span>04.</span>Build, Test, Collaborate & Deploy</h5>
+                                          <p>At this stage, I begin coding the project using Python Django, ensuring clean and efficient code that 
+                                              adheres to best practices. Rigorous testing is a priority, encompassing unit testing, integration 
+                                              testing, and user acceptance testing. Collaborating closely with cross-functional teams, I fine-tune 
+                                              features and address any issues. Once the project passes testing and review, I deploy it to a live 
+                                              environment, ensuring seamless integration and smooth user experience. <p>
+                                      </div>
+                                  </div>
+                              </div>  
+                          <p style="text-align: ;">Throughout these stages, my focus remains on open communication, iterative development, and constant 
+                          collaboration with stakeholders. This approach ensures that the final product not only meets the initial 
+                          requirements but also aligns with emerging needs and provides the best possible solution.</p>
+                          </div>
+                             
+                      
+  
+                      
+                      <div class="contact-btn mt-5">
+                          <h3>Have a project on mind? Lets work together</h3>
+                          <a href="{% url 'contact' %}" class="btn btn-secondary btn-rounded mt-4">Contact Us</a>
+                          <a href="{% url 'services:services' %}" class="btn btn-secondary btn-rounded mt-4">View All Services</a>
+                      </div>
+                  </div>
+              </div>
+  
+              <div class="col-lg-4">
+                  <div class="page-sidebar">
+                      <div class="service-list">
+                          <h3 class="mb-3">{{obj.side_title}}</h3>
+                          <p>{{obj.side_summary}}</p>
+                          <ul class="list-unstyled my-4 pl-0">
+                              <li><i class="ti-check"></i>{{obj.side_key_point_1}}</li>
+                              <li><i class="ti-check"></i>{{obj.side_key_point_2}}</li>
+                              <li><i class="ti-check"></i>{{obj.side_key_point_3}}</li>
+                              <li><i class="ti-check"></i>{{obj.side_key_point_4}}</li>
+                          </ul>
+                      </div>
+  
+                      <div class="company-info">
+                          <h3>Contact Info</h3>
+  
+                          <ul class="list-unstyled pl-0">
+                              <li>
+                                  <div class="d-flex">
+                                      <div class="icon"><i class="ti-location-pin"></i></div>
+                                      53 CMD Road, Magodo <br>Ikeja, Lagos Nigeria
+                                  </div>
+                              </li>
+                              <li>
+                                  <div class="d-flex">
+                                      <div class="icon"><i class="ti-headphone-alt"></i></div>
+                                      +234-(0)902-216-2214
+                                  </div>
+                              </li>
+                              <li>
+                                  <div class="d-flex">
+                                      <div class="icon"><i class="ti-email"></i></div>
+                                     sanchez.alexander.cyril<br>@gmail.com
+                                  </div>
+                              </li>
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+          </div>      
+      </div>
+  </section>
+  
+
+
+{% include 'footer.html' %}
+{% endblock %}

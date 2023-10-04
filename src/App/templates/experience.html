@@ -1,0 +1,56 @@
+<!-- /EXPERIENCE -->
+<section class="section experience" id="skills" style="margin-top:-120px;">
+	<div class="container-fluid" style="width:95%;">
+		<div class="row">
+			<div class="col-lg-6">
+				<div class="title">
+					<h2>Work Experience</h2>
+				</div>
+			</div>	
+		</div>
+
+		<div class="row" style="margin-top:-50px;">
+			{% for obj in experience %}
+			<div class="col-lg-6" style="text-align:;">
+				<div class="content mb-4">
+					<h4>{{obj.job_title}}</h4>
+					<span class="text-color">{{obj.company_and_year}}</span>
+					<p>{{obj.job_summary|safe}}</p>
+				</div>
+
+
+				{% comment %} <div class="content mb-4">
+					<h4>Developer</h4>
+					<span class="text-color">Googl inc[2000-2004]</span>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
+				</div>
+			</div>
+			<div class="col-lg-6">
+				<div class="content mb-4">
+					<h4>Marketer</h4>
+					<span class="text-color">Googl inc[2000-2004]</span>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
+				</div>
+				<div class="content mb-4">
+					<h4>Marketer</h4>
+					<span class="text-color">Googl inc[2000-2004]</span>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
+				</div> {% endcomment %}
+
+			</div>
+			{% endfor %}
+		</div>
+
+		<br>
+		<!--------MY-CV---------->
+		{% if pdf_documents %}
+		{% for pdf in pdf_documents %}
+        <a href="{{ pdf.pdf_file.url }}" target="blank" class="btn btn-main btn-rounded">
+			{{ pdf.title }}<i class="fa fa-angle-right ml-2"></i></a>
+		{% endfor %}
+		{% else %}
+		<a href="" class="btn btn-main btn-rounded">
+			CV is not Available at the moment<i class="fa fa-angle-right ml-2"></i></a>
+		{% endif %}
+	</div>
+</section>

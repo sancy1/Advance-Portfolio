@@ -1,0 +1,182 @@
+
+{% load static %}
+{% load active_link_tags %}
+
+<!----#1cac78;---->
+<style>
+  .logout span{
+    background: 
+    color:#fff;
+    padding:10px;
+    border-radius:40px;
+    margin-left:-20px;
+  }
+  .logout span:hover{
+    background: ;
+    color:#FF3D4F;
+    border-radius:5px;
+    transition:0.5s;
+  }
+
+  .signin span{
+    background: #;
+    color:#000;
+    padding:10px;
+    border-radius:5px;
+  }
+  .signin span:hover{
+    background: #FF3D4F;
+    color:#fff;
+    border-radius:5px;
+    transition:0.5s;
+    border-radius:20px;
+  }
+
+  .active{
+    background:#FF3D4F; 
+  }
+  .active a{ 
+    color:#fff;
+  }
+  .active:hover{
+    background:#fff; 
+  }
+  .active:hover{
+    background:#000; 
+    color:#fff;
+  }
+</style>
+
+<style>
+  .dropdown {
+    position: relative;
+}
+
+.dropdown-toggle {
+    display: block;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 75%;
+    left: 10;
+    background-color: #fff;
+    padding: 20px;
+    border: 0px solid #ccc;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2); 
+    width:92%;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+</style>
+
+
+<nav class="navbar navbar-expand-lg navigation header-padding site-header" id="navbar">
+    <div class="container-fluid">
+          <img src="{% static 'assets/images/logo.png' %}" alt="Rubi" class="img-fluid">
+      </a>
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarmain" aria-controls="navbarmain" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="fa fa-bars"></span>
+      </button>
+  
+      <div class="collapse navbar-collapse" id="navbarmain">
+        <ul class="navbar-nav m-auto">
+
+          {% url 'home' as url %}
+
+          {% if request.path == url %}
+          <li class="nav-item {% if request.path == url %}active{% endif %}">
+            <a class="nav-link" href="{{url}}">Home</a></li>
+
+           <li class="nav-item item"><a class="nav-link smoth-scroll" href="#about">About</a></li>
+           <li class="nav-item item"><a class="nav-link smoth-scroll" href="#services">Services</a></li>
+           {% comment %} <li class="nav-item"><a class="nav-link smoth-scroll" href="#portfolio">Portfolio</a></li> {% endcomment %}
+           <li class="nav-item item"><a class="nav-link smoth-scroll" href="#skills">Skills</a></li>
+           {% comment %} <li class="nav-item"><a class="nav-link smoth-scroll" href="#team">Team</a></li> {% endcomment %}
+           <li class="nav-item item"><a class="nav-link smoth-scroll" href="#blog">Blog</a></li>
+
+           {% url 'contact' as contact_url %}
+           <li class="nav-item {% if request.path == contact_url %}active{% endif %}">
+            <a class="nav-link" href="{{contact_url}}">Contact</a></li>
+
+
+           {% else %}
+           <li class="nav-item {% if request.path == url %}active{% endif %}">
+            <a class="nav-link" href="{{url}}">Home</a></li>
+
+            {% url 'services:services' as services_url %}
+            {% url 'services:services_search_results' as service_search_result %}
+           <li class="nav-item {% if request.path == services_url or request.path == service_search_result %}active{% endif %}">
+            {% if services_url %}
+            <a class="nav-link" href="{{services_url}}">Services</a></li>
+            {% elif service_search_result %}
+            <a class="nav-link" href="{{service_search_result}}">Services</a></li>
+            {% endif %}
+
+            {% url 'blog' as blog_url %}
+            {% url 'search_results' as search_results %}
+            {% url 'favourites' as favourites %}
+           <li class="nav-item {% if request.path == blog_url or request.path == search_results or request.path == favourites %}active{% endif %}">
+            {% if blog_url %}
+            <a class="nav-link" href="{{blog_url}}">Blog</a></li>
+            {% elif search_results %}
+            <a class="nav-link" href="{{search_results}}">Blog</a></li>
+            {% elif favourites %}
+            <a class="nav-link" href="{{favourites}}">Blog</a></li>
+            {% endif %}
+           
+           {% url 'contact' as contact_url %}
+           <li class="nav-item {% if request.path == contact_url %}active{% endif %}" style="margin-right:15px;">
+            <a class="nav-link" href="{{contact_url}}">Contact</a></li>
+            {% endif %}
+
+       
+
+           <!-----------USERS AUTHENTICATION-------------> 
+           {% if user.is_authenticated %}
+           <li class="nav-item logout dropdown">
+
+              <!------DISPLAY USERS NAME------>
+              <a class="nav-link dropdown-toggle">
+                <span>
+                  {% comment %} <i class="fa fa-user-circle" style="font-size:18px;"></i>  {% endcomment %}
+                  {% for obj in profile_image %}
+                  <img src="{{ obj.avatar.url }} " style="width:33px; height:33px; border-radius:100%; margin-top:-10px;">
+                  &nbsp;{{ user.username }} {% endfor %} </span></a>
+
+                  <!----PROFILE---->
+                <ul class="dropdown-menu">
+                    {% url 'users_dashboard' as url %}
+                    <li class="{% if request.path == url %}active{% endif %}">
+                    <a href="{{url}}"><i class="fa fa-user"></i> Profile</a></li>
+
+                    <!------LOGOUT------>
+                    {% url 'logout' as url %}
+                    <li class="{% if request.path == url %}active{% endif %}">
+                      <a href="{{url}}"><i class="fa fa-sign-out"></i> Logout</a></li>
+                </ul>
+          </li>
+          {% else %}
+          <!------LOGIN------>
+          <li class="nav-item signin">
+            <a class="nav-link smoth-scroll" href="{% url 'login' %}">
+              <span><i class="fa fa-user-circle" style="font-size:22px;"></i>&nbsp; Signin</span>
+          </a>
+        </li>
+           {% endif %}
+       
+          </ul>
+
+        {% comment %} <form class="form-inline my-2 my-md-0 ml-lg-4">
+          <a href="{% url 'contact' %}" class="btn btn-main btn-rounded smoth-scroll">Contact Us<i class="fa fa-angle-right ml-2"></i></a>
+        </form> {% endcomment %}
+      </div>
+    </div>
+</nav>
+<!-- Header Close --> 
+
+{% comment %} background: #FF3D4F; {% endcomment %}

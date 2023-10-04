@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+{% block title %} Register Page {% endblock title%}
+{% block content %}
+
+<style>
+  .sub {
+      background:#000a2d;
+      border:1px solid #000a2d;
+  }
+  .sub:hover {
+      background:#FF3D4F;
+      border:1px solid #FF3D4F; 
+  }
+</style>
+
+{% include 'navbar.html' %}
+
+
+<!-- Section: Design Block -->
+<section class="text-center" id="slider">
+    <!-- Background image -->
+    <div class="p-5 bg-image" style="
+          background-image: url('https://mdbootstrap.com/img/new/textures/full/171.jpg');
+          height: 300px;
+          "></div>
+    <!-- Background image -->
+  
+    <div class="card mx-4 mx-md-5 shadow-5-strong" style="
+          margin-top: -100px;
+          background: hsla(0, 0%, 100%, 0.8);
+          backdrop-filter: blur(30px);
+          ">
+      <div class="card-body py-5 px-md-5">
+  
+        <div class="row d-flex justify-content-center">
+          <div class="col-lg-8">
+            <h2 class="fw-bold mb-5"><i class="fa fa-user-circle"></i> Sign up now</h2>
+
+
+
+            <form method="POST">
+                {% csrf_token %}
+                                {% if form.errors %}
+                                    <div class="alert alert-danger alert-dismissible" role="alert">
+                                        <div id="form_errors">
+                                            {% for key, value in form.errors.items %}
+                                                <strong>{{ value }}</strong>
+                                            {% endfor %}
+                                        </div>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                {% endif %}
+
+              <!-- 2 column grid layout with text inputs for the first and last names -->
+              <div class="row">
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    {{ form.first_name }}
+                    <!-- <label class="form-label" for="form3Example1">First name</label> -->
+                  </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    {{ form.last_name }}
+                    <!-- <label class="form-label" for="form3Example2">Last name</label> -->
+                  </div>
+                </div>
+
+                <div class="col-md-6 mb-4">
+                    <div class="form-outline">
+                        {{ form.username }}
+                      <!-- <label class="form-label" for="form3Example1">First name</label> -->
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <div class="form-outline">
+                        {{ form.email }}
+                      <!-- <label class="form-label" for="form3Example2">Last name</label> -->
+                    </div>
+                  </div>
+                
+              </div>
+  
+              <!-- Email input -->
+              <div class="form-outline mb-4">
+                {{ form.password1 }}
+                {{ form.errors.password }}
+                <!-- <label class="form-label" for="form3Example3">Email address</label> -->
+              </div>
+  
+              <!-- Password input -->
+              <div class="form-outline mb-4">
+              {{ form.password2 }}
+              </div>
+  
+              <!-- Checkbox -->
+              {% comment %} <div class="form-check d-flex justify-content-center mb-4">
+                <input class="form-check-input me-2" type="checkbox" value="" id="form2Example33" checked />
+                <label class="form-check-label" for="form2Example33">
+                  Subscribe to our newsletter
+                </label>
+              </div> {% endcomment %}
+  
+              <!-- Submit button -->
+              <button type="submit" class="btn btn-primary btn-block sub mb-4">
+                Sign up
+              </button>
+  
+              <!-- Register buttons -->
+              <div class="card-footer text-center">
+                <div class="small">
+                    <a href="{% url 'login' %}">
+                   Have an account? Go to  &nbsp;&nbsp; <i class="fa fa-user"></i>&nbsp; Sign in</a>
+                </div>
+            </div>
+            
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Section: Design Block -->
+
+{% include 'footer.html' %}
+{% endblock content %}

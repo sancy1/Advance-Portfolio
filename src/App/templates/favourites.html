@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load active_link_tags %}
+{% load widget_tweaks %}
+{% load hitcount_tags %}
+
+{{page_title}}
+
+{% block content %}
+
+<style>
+	.category button{
+		background:#E8E9EB;
+		border:1.5px solid #F5F5F5;
+		border-radius:7px;
+	}
+
+	.category button:hover{
+		background:#FF3D4F;
+		color:#fff;
+		transition:0.5s;
+	}
+</style>
+
+
+{% include 'navbar.html' %}
+
+<div style="background:#f7f7f8;">
+	<section class="page-title bg-2" id="slider">
+		<div class="container-fluid" style="width:95%;">
+		  <div class="row align-items-center">
+			<div class="col-lg-7">
+				<h1> Remove or view saved Post</h1>
+				<p>Welcome to your Favorite Post page! Here, you have full control over the posts you 
+					love. You can easily add or remove posts from your list of favorites to keep 
+					track of your most cherished content
+
+					Here's how:
+					To Add a Post to Your Favorites:
+
+					Browse through the posts.
+					Find a post that you love.
+					Click the "Add to Favorites" button (or similar).
+					The post will now be added to your list of favorites.
+				</p>  
+			</div>
+	  
+			<div class="col-lg-5">
+			  <ul class="list-inline header-breadcumb text-lg-right mt-5 mt-lg-0">
+				<li class="list-inline-item"><a href="{% url 'home' %}">Home</a></li>
+				<li class="list-inline-item">/</li>
+				<li class="list-inline-item">Blog</li>
+			  </ul>
+			</div>
+		  </div>
+		</div>
+	  </section>
+	  <br>
+	  <br>
+
+
+<section class="section" id="slider" style="background:#f8f9fa;">
+	<div class="container-fluid" style="width:90%;">
+		<div class="row justify-content-center">
+			<div class="col-lg-12">
+				<div class="section-title text-center">
+
+					{% comment %} <h3 class="mb-4 text-lg" style="margin-top:-50px; font-size:35px;">
+                        Remove or view saved Post
+                    </h3> {% endcomment %}
+					
+					{% comment %} <p>Welcome to your Favorite Post page! Here, you have full control over the posts you 
+                        love. You can easily add or remove posts from your list of favorites to keep 
+                        track of your most cherished content
+
+                        Here's how:
+                        To Add a Post to Your Favorites:
+
+                        Browse through the posts.
+                        Find a post that you love.
+                        Click the "Add to Favorites" button (or similar).
+                        The post will now be added to your list of favorites.
+                    </p>   {% endcomment %}
+
+					<h3 class="mb-4 text-lg" style="margin-top:-130px; font-size:35px;">
+                        My Favourite Post
+                    </h3>
+						
+                        {% if new %}
+                    <div class="container" style="margin-top:-15px; color:#1cac78 ; font-size:21px;">
+                        <i class="fa fa-save"></i>&nbsp; You have {{new|length}} saved Post
+                    </div><hr>
+                    {% else %}
+                    <div class="container" style="margin-top:-15px; color:red; font-size:21px;">
+                        <i class="fa fa-exclamation-triangle"></i>&nbsp; 
+						<span style="color:#000; text-transform:capitalize;">
+							{{user}}!</span> You have no saved Post
+                        <hr>
+                        <a href="{% url 'blog' %}" class="btn btn-primary">
+                            <i class="fa fa-newspaper"></i>&nbsp; Return to blog</a>
+                    </div>
+                    {% endif %}
+                </div>
+
+			</div>
+		</div>
+
+
+
+
+
+
+		<div class="container-fluid" style="width:100%; margin-top:5px;">
+		<div class="row"> 
+			{% for obj in new %}
+				
+				<div class="col-lg-6 col-md-6 ">
+					<div class="blog-item mb-5 mb-lg-12">
+						<a href="{{obj.get_absolute_url}}" >
+						<img src="{{obj.image.url}}" alt="" class="img-fluid">
+						<div class="content mt-4">
+
+              <span><img src="{{obj.author.profile_picture.url}}" style="width:40px; height:40px; border-radius:100px;"> 
+                &nbsp;<span style="">{{obj.author}} Cyril</span>
+              </span>
+
+              <span>&nbsp;&nbsp;&nbsp;<i class="fa fa-eye" style="color:#6e7797;">&nbsp; </i>
+                {% get_hit_count for obj %}
+							</span>
+
+              &nbsp;&nbsp;&nbsp; <span class="timecount" style="color:#FF3D4F;">
+								<i class="ti-comments mr-3"></i>
+								{{obj.cate_name}} </span> 
+
+							<h4 class="mb-3 mt-2"><a href="{{obj.get_absolute_url}}">{{obj.title}}</a></h4>
+							<p>{{obj.overview|safe|truncatechars:110}}</p>
+							
+							<a href="{{obj.get_absolute_url}}" class="btn btn-primary">Read More <i class="ti-angle-right"></i></a>
+                            <a href="{% url 'favourite_add' obj.id %}" class="btn btn-danger">Remove</a>
+						</div>
+					</div>
+				</a>
+				</div>
+				{% endfor %}
+			</div>
+
+		</div>
+	</section>
+
+
+{% include 'footer.html' %}
+{% endblock %}

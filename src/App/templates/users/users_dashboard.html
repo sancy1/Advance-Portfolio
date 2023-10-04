@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load active_link_tags %}
+
+{% block title %}Logout{% endblock title %}
+{% block content %}
+
+
+<style>
+    .gradient-custom-2 {
+        /* fallback for old browsers */
+        background: #fbc2eb;
+        
+        /* Chrome 10-25, Safari 5.1-6 */
+        background: -webkit-linear-gradient(to right, rgba(251, 194, 235, 1), rgba(166, 193, 238, 1));
+        
+        /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        background: linear-gradient(to right, rgba(251, 194, 235, 1), rgba(166, 193, 238, 1))
+        }
+
+
+    .but{
+        padding:6px; 
+        background:#343a40; 
+        color:#fff; 
+        border-radius:4px; 
+        font-weight:bold;
+    }
+    .but:hover{
+        background:#ff3d4f; 
+        color:#fff;
+        transition:0.5s; 
+    }
+</style>
+
+{% include 'navbar.html' %}
+
+
+<section class="h-100 gradient-custom-2" id="slider">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col col-lg-9 col-xl-10">
+          <div class="card">
+            <div class="rounded-top text-white d-flex flex-row" style="background-color: #000; height:200px;">
+              <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;">
+
+                <img src="{{ user.profile.avatar.url }}"
+                  alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
+                  style="width: 150px; z-index: 1">
+                  
+                <a href="{% url 'users-profile' %}" class="btn btn-outline-dark" data-mdb-ripple-color="dark" 
+                  style="z-index: 1; margin-top:-10px;">
+                   Edit profile
+              </a>
+              </div>
+
+              <div class="card ms-3" style="margin-top: 70px; margin-left:20px; padding:6px; background:transparent;">
+                <h4 style="color:#fff;"><span style="text-transform:capitalize;">{{user}} </span></h4>
+                <p style="color:#fff;">{{ user.email }}</p>
+              </div>
+            </div>
+            
+            <div class="p-4 text-black" style="background-color: #f8f9fa;">
+              <div class="d-flex justify-content-end text-center py-1">
+                <div>
+                  <a href="{% url 'blog' %}"><p class="mb-1 but">Blog</p></a>
+                  {% comment %} <a href={% url  'blog' %} class="small text-muted mb-0">Photos</p> {% endcomment %}
+                </div>&nbsp; &nbsp; &nbsp;
+                <div>
+                    <a href="{% url 'services:services' %}"> <p class="mb-1 but">Service</p></a>
+                  {% comment %} <p class="small text-muted mb-0">Following</p> {% endcomment %}
+                </div>
+              </div>
+            </div>
+
+            <div class="card-body p-4 text-black">
+              <div class="mb-5">
+                <p class="lead fw-normal mb-1 mt-4">About</p>
+                <div class="p-4" style="background-color: #f8f9fa;">
+                  {% for obj in profile_image %}
+                  <p class="font-italic mb-1">{{ obj.bio }}</p>
+                  {% endfor %}
+                </div>
+              </div>
+              <div class="d-flex justify-content-between align-items-center mb-4">
+                <p class="lead fw-normal mb-0">My Favourite</p>
+                <p class="mb-0"><a href="{% url 'favourite_list' %}" class="btn btn-dark">Show all</a></p>
+              </div>
+              <div class="row g-2">
+                {% if request.user.is_authenticated %}
+                {% for obj in new %}
+
+                <div class="col mb-2">
+                  <a href="{{obj.get_absolute_url}}">
+                    <img src="{{obj.image.url}}"
+                      alt="image 1" class="w-100 rounded-3"> {{obj.title}}
+                  </a>
+                </div>
+                {% endfor %}
+                {% else %}
+                <div class="card text-center">
+                  <h5>You have no Favourite post. Add post to favourite to see them here</h5>
+                </div>
+                {% endif %}
+               
+                {% comment %} <div class="col mb-2">
+                  <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(107).webp"
+                    alt="image 1" class="w-100 rounded-3">
+                </div>
+              </div>
+              <div class="row g-2">
+                <div class="col">
+                  <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(108).webp"
+                    alt="image 1" class="w-100 rounded-3">
+                </div>
+                <div class="col">
+                  <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(114).webp"
+                    alt="image 1" class="w-100 rounded-3">
+                </div> {% endcomment %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+
+  {% include 'footer.html' %}
+
+  {% endblock %}

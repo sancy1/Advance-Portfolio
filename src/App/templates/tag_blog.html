@@ -1,0 +1,161 @@
+
+
+{% extends 'base.html' %}
+{% load static %}
+{% load active_link_tags %}
+{% load widget_tweaks %}
+{% load hitcount_tags %}
+
+{{page_title}}
+
+{% block content %}
+
+<style>
+	button{
+		background:#fff;
+		border:1.5px solid #E8E9EB;
+        box-shadow: 0 3px 10px rgb(0 0 0 / 0.2); 
+		border-radius:3px;
+	}
+
+	button:hover{
+		box-shadow: 0 0px 0px rgb(0 0 0 / 0.2); 
+        color:gray;
+		transition:0.5s;
+	}
+   
+</style>
+
+
+{% include 'navbar.html' %}
+
+
+<section class="page-title bg-2" id="slider">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-7">
+            <h1>Posts tagged with {{tag.name}}</h1>
+            <!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi, quibusdam.</p> -->
+        </div>
+  
+        <div class="col-lg-5">
+          <ul class="list-inline header-breadcumb text-lg-right mt-5 mt-lg-0">
+            <li class="list-inline-item"><a href="index-2.html">Home</a></li>
+            <li class="list-inline-item">/</li>
+            <li class="list-inline-item">{{tag.name}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section class="section service-single">
+      <div class="container">
+          <div class="row">
+              <div class="col-lg-8">
+                  <div class="projects-details">
+                      <img src="" alt="" class="img-fluid">
+                      <div class="details mt-4">
+                          <div class="title mb-30">
+                              <h2 style="margin-top:-60px;">Posts tagged with 
+                                <span style="color:#FF3D4F;">{{tag.name}}</span></h2>
+                          </div>
+                          
+                          <p><!---------------CATEGORY--------------->
+							{% for post in tagged_posts %}
+								<a href="{{post.get_absolute_url}}">
+									<button class="course_button text-center mr-2 mb-4 padding-bottom:25px !important;">
+										<span style="font-size:20px;">
+
+                                            <img src="{{post.image.url}}" style="width:100%; height:100%; padding-bottom:10px;"> 
+
+                                            <div style="font-size:15px;"> 
+                                                <img src="{{post.author.profile_picture.url}}" style="width:40px; height:40px; border-radius:100px;"> 
+                                                &nbsp;{{post.author.user}} Cyril &nbsp;&nbsp;&nbsp;
+                                                <i class="fa fa-calendar-check" style="color:#6e7797;"></i>&nbsp; {{post.publish.date}}  
+                                                &nbsp;&nbsp; <i class="fa fa-clock" style="color:#6e7797;"></i>&nbsp; {{post.publish.time}}
+                                                &nbsp;&nbsp; <i class="fa fa-eye" style="color:#6e7797;"></i>&nbsp; {% get_hit_count for post %}
+                                            </div>
+                                            
+                                            <span style="font-weight:bold; padding-bottom:10px;">
+                                                <i class="fa fa-laptop"></i> 
+                                                {{ post.title|truncatechars:50 }}</span>
+                                            </span>
+										    
+                                            <span class="button_arrow">
+											<i class="fa fa-angle-right" aria-hidden="true"></i>
+										</span>
+                                        <p></p>
+									</button>
+								</a>
+							{% endfor %}</p>
+                        </div>
+                  </div>
+  
+                  <div class="process-wrap mt-5">
+                      <div class="row"> 
+                      </div>
+  
+                  </div>
+              </div>
+  
+              <div class="col-lg-4">
+                  <div class="page-sidebar">
+                      <div class="project-info">
+                          <h3 class="mb-3 border-bottom pb-3">Blog Category</h3>
+                          {% for category in category_list %}
+
+                          <ul class="list-unstyled pl-0">
+                              <li>
+                                <a href="/category/{{ category.name}}">{{category.name}}</a>
+                              </li>
+                               <li>
+                                  {% comment %} <h5>Client:</h5>
+                                  Themeturn
+                              </li> 
+  
+                              <li>
+                                  <h5>Location:</h5>
+                                  Newyork
+                              </li>
+  
+                               <li>
+                                  <h5>Category:</h5>
+                                  Marketing,Branding
+                              </li>
+  
+                               <li>
+                                 <h5>Project Link:</h5>
+                                  <a href="#">https://themeturn.com/</a>
+                              </li> {% endcomment %}
+                          </ul>
+                          {% endfor %}
+                      </div>
+                  </div>
+              </div>
+          </div>      
+      </div>
+  </section>
+
+{% include 'footer.html' %}
+{% endblock %}
+
+
+
+
+{% comment %} <!DOCTYPE html>
+<html>
+<head>
+    <title>Posts tagged with {{ tag.name }}</title>
+</head>
+<body>
+    <h1>Posts tagged with {{ tag.name }}</h1>
+    <ul>
+        {% for post in tagged_posts %}
+            <li><a href="{{post.get_absolute_url}}">{{ post.title }}</a></li>
+        {% empty %}
+            <li>No posts found with this tag.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html> {% endcomment %}

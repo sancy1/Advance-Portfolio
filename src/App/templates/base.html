@@ -1,0 +1,89 @@
+{% load static %}
+{% load active_link_tags %}
+
+
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="description" content="remus,business,company,agency,multipurpose,modern,bootstrap4">
+  
+  <meta name="author" content="Dreambuzz">
+
+  <title>{{ page_title }}</title>
+
+  <!-- Mobile Specific Meta-->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/images/favicon.ico' %}" />
+  <!-- bootstrap.min css -->
+  <link rel="stylesheet" href="{% static 'assets/plugins/bootstrap/css/bootstrap.min.css' %}">
+  <!-- animate.css -->
+  <link rel="stylesheet" href="{% static 'assets/plugins/animate-css/animates.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/plugins/fontawesome/css/all.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/plugins/themify/css/themify-icons.css' %}">
+  <!-- Magnify Popup -->
+  <link rel="stylesheet" href="{% static 'assets/plugins/magnific-popup/dist/magnific-popup.css' %}">
+   <link rel="stylesheet" href="{% static 'assets/plugins/animated-text/animated-text.css' %}">
+  <!-- Slick Carousel CSS -->
+  <link rel="stylesheet" href="{% static 'assets/plugins/slick-carousel/slick/slick.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/plugins/slick-carousel/slick/slick-theme.css' %}">
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+
+</head>
+<body>
+  
+
+  <!--Any flash messages pop up in any page because this is the base template-->
+  <div class="container">
+  {% if messages %}
+    <div class="alert alert-dismissible" role="alert">
+      {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}" style="background:#e0f2f1;">{{ message }}
+      {% endfor %}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button></div>
+    </div>
+  {% endif %}
+  </div>
+
+    {% block content %}
+    {% endblock %}
+
+    <div class="footer-top text-right">
+			<a href="#slider" class="top-to-bototm smoth-scroll"><i class="ti-angle-up"></i></a>
+		</div>
+
+    <!-- 
+    Essential Scripts
+    =====================================-->
+    <!-- Main jQuery -->
+    <script src="{% static 'assets/plugins/jquery/jquery.min.js' %}"></script>
+    <!-- Bootstrap 4.3.1 -->
+    <script src="{% static 'assets/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+    <!-- Slick Slider -->
+    <script src="{% static 'assets/plugins/slick-carousel/slick/slick.min.js' %}"></script>
+    <!-- Progress Bar -->
+    <script src="{% static 'assets/plugins/counto/apear.js' %}"></script>
+    <script src="{% static 'assets/plugins/counto/counTo.js' %}"></script>
+    <script src="{% static 'assets/plugins/animated-text/animated-text.js' %}"></script>
+
+    <script src="{% static 'assets/plugins/counterup/waypoint.js' %}"></script>
+    <script src="{% static 'assets/plugins/counterup/jquery.counterup.min.js' %}"></script>
+    <!--  Magnific Popup-->
+    <script src="{% static 'assets/plugins/magnific-popup/dist/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'assets/plugins/shuffle/shuffle.min.js' %}"></script>
+  
+    <script src="{% static 'assets/plugins/jquery/ajax-contact.js' %}"></script>
+    <script src="{% static 'assets/js/script.js' %}"></script>
+
+    <!-------SHOW AND HIDE PASSWORD-------->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/bootstrap-show-password@1.2.1/dist/bootstrap-show-password.min.js"></script>
+
+  </body>
+</html>

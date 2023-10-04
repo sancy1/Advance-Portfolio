@@ -1,0 +1,209 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% load active_link_tags %}
+{% load widget_tweaks %}
+
+{{page_title}}
+
+{% block content %}
+{% include 'navbar.html' %}
+
+
+<style>
+    @import url("https://fonts.googleapis.com/css?family=Nunito+Sans");
+    
+    .row {
+      margin: 0 0 !important;
+    }
+    
+    .course_card {
+      margin: 25px 10px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      word-wrap: break-word;
+      background-color: #fff;
+      background-clip: border-box;
+      transition: 0.25s ease-in-out;
+    }
+    .course_card_img {
+      max-height: 100%;
+      max-width: 100%;
+    }
+    .course_card_img img {
+      height: 250px;
+      width: 100%;
+      transition: 0.25s all;
+    }
+    .course_card_img img:hover {
+      transform: translateY(-3%);
+    }
+    .course_card_content {
+      padding: 16px;
+    }
+    
+    .course_card_footer {
+      padding: 10px 0px;
+      margin: 16px;
+    }
+    .course_card_footer a {
+      text-decoration: none;
+      font-family: nunito sans;
+      margin: 0 10px 0 0;
+      text-transform: uppercase;
+      color: #f96332;
+      padding: 10px;
+      font-size: 14px;
+    }
+    .course_card:hover {
+      transform: scale(1.025);
+      border-radius: 0.375rem;
+      box-shadow: 0 0 2rem rgba(0, 0, 0, 0.25);
+    }
+    .course_card:hover .course_card_img img {
+      border-top-left-radius: 0.375rem;
+      border-top-right-radius: 0.375rem;
+    }
+
+    .description{
+        margin-top:-52px;
+    }
+
+    .more a{
+        color:orange;
+    }
+
+</style>
+
+<div style="background:#f7f7f8;">
+<section class="page-title bg-2" id="slider">
+    <div class="container-fluid" style="width:95%;">
+      <div class="row align-items-center">
+        <div class="col-lg-7">
+            <h1>My Services</h1>
+            <p>I specialize in Python Django development, crafting web applications and softwares with 
+                precision and efficiency to bring your digital ideas to life.</p>
+        </div>
+  
+        <div class="col-lg-5">
+          <ul class="list-inline header-breadcumb text-lg-right mt-5 mt-lg-0">
+            <li class="list-inline-item"><a href="{% url 'home' %}">Home</a></li>
+            <li class="list-inline-item">/</li>
+            <li class="list-inline-item">Services</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+  <br>
+
+
+  <div class="container-fluid" style="width:95%;">
+  <!--------SEARCH FORM-------->
+  <form action="{% url 'services:services_search_results' %}" class="search-form" role="search" style="margin-top:-30px; margin-bottom:40px;">
+    {% csrf_token %}
+
+    <div class="input-group">
+      <input type="text" class="form-control input-lg" name="q" placeholder="Search Services...">
+      <span class="input-group-btn">
+        <button class="btn btn-success btn-lg" type="submit" style="background:#FF3D4F; border:1px solid #FF3D4F;">
+            <span style="font-size:17px; cursor:pointer;"><i class="fa fa-search"></i> Search</span></button>
+      </span>
+    </div>
+  </form>
+
+
+ <!--FILTER COURSES WITH COURSE NAME WHICH IS "TITLE"-->
+ <div style="margin-bottom:60px; margin-top:-20px;">
+    <form method="get">
+        {% csrf_token %}
+        {% render_field form.services_name class="form-control" name="services_name" type="text" %}
+        <button type="submit" class="btn bg-gradient-primary w-100 my-1 mb-1 services-btn" 
+            style="cursor:pointer; font-size:13.6px; font-weight:bold;">
+            <i class="fa fa-send-o" style="font-size:13.6px;"></i> 
+                FILTER SERVICES
+        </button>
+    </form>
+</div>
+<!--END-->
+</div>
+
+
+
+<!-- partial:index.partial.html -->
+<div class="container-fluid" id="slider" style="width:99%;">
+<div class="row mx-auto">
+    {% for obj in page %}
+
+  <div class="col-lg-4 col-md-6 col-sm-12">
+    <div class="course_card">
+      <div class="course_card_img">
+
+    <a class="nav-item" href="{{obj.get_absolute_url}}">
+        <img src="{{obj.image.url}}" alt="course"/></div>
+
+      <div class="course_card_content">
+        <h3 class="title">{{obj.title}}</h3>
+    </a>
+        <p class="description">{{obj.introduction|truncatechars:90}}</p>
+      </div>
+
+      <div class="course_card_footer more" style="margin-top:-20px;">
+        <a class="nav-item btn btn-dark" href="{{obj.get_absolute_url}}">Learn More</a></div>
+    </div>
+  </div>
+  {% endfor %}
+
+
+  	<!-- PAGINATION STARTS HERE-->
+	<div class="container-fluid text-center" style="margin-bottom:-110px; margin-top:26px; width:98%;">
+        <nav aria-label="Page navigation example">
+         <ul class="pagination">
+
+           {% if page.has_previous %}
+           <li class="page-item" style="color:#000;">
+             <a class="page-link" href="?page={{page.previous_page_number}}" style="color:#000; background:#98FB98;"
+               >Previous</a>
+           </li>
+           {% else %}
+           <li class="page-item disabled" style="color:#000;">
+             <a class="page-link" href="#" style="background:#E5E4E2;">Previous</a>
+           </li>
+           {% endif %}
+     
+           {% for i in page.paginator.page_range %} 
+           {% if page.number == i %}
+     
+               <li class="page-item"  style="color:#000;">
+                   <a class="page-link active" style="background:#FF3D4F; color:#fff;">{{ i }}</a></li>
+           {% else %}
+               <li class="page-item">
+               <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+               </li>
+           {% endif %} 
+           {% endfor %} 
+           
+           {% if page.has_next %}
+     
+               <li class="page-item" style="color:#000;">
+               <a href="?page={{page.next_page_number}}" class="page-link" style="color:#000; background:#98FB98;"
+                   >Next</a>
+               </li>
+           {% else %}
+               <li class="page-item disabled"  style="color:#000;">
+               <a class="page-link" style="background:#E5E4E2;">Next</a>
+               </li>
+           {% endif %}
+          </div>
+
+</div>
+</div>
+</div>
+
+
+{% include 'footer.html' %}
+
+{% endblock %}

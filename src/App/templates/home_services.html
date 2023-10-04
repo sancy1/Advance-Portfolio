@@ -1,0 +1,103 @@
+
+<!-----MY-SERVICES------>
+<section class="section secondary-bg" id="services">
+	<div class="container-fluid" style="width:95%;">
+		<div class="row justify-content-center">
+			<div class="col-lg-12">
+				<div class="section-title text-center">
+					<h2 class="mb-4 text-lg">My services</h2>
+					<p>I offer a comprehensive range of services as a skilled Python Django developer, dedicated to creating 
+						robust and innovative task automation, software and web applications. With a deep understanding of Django's capabilities and a 
+						commitment to delivering high-quality solutions, I provide the following services:</p>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="row no-gutters">
+			{% for obj in home_services %}
+			
+			<a href="{{obj.get_absolute_url}}">
+			<div class="col-lg-4 col-md-6">
+				<div class="service-item">
+					<div class="d-flex align-items-center mb-4">
+						<i class="ti-microphone mr-3"></i>
+						<h4>{{obj.title}}</h4>
+					</div>
+					<p>{{obj.introduction|truncatechars:62}}</p>
+
+					<a href="{{obj.get_absolute_url}}" class="read-more">Learn More <i class="fa fa-angle-right"></i></a>
+				</div>
+			</a>
+			</div>
+			{% endfor %}
+			
+
+
+
+			{% comment %} <div class="col-lg-4 col-md-6">
+				<div class="service-item">
+					<div class="d-flex align-items-center mb-4">
+						<i class="ti-html5 mr-3"></i>
+						<h4>Web Development</h4>
+					</div>
+					<p>Lorem ipsum dolor sit amet, consect etur adipisicing elit, sed.</p>
+
+					<a href="service-single.html" class="read-more">Learn More <i class="fa fa-angle-right"></i></a>
+				</div>
+			</div>
+			<div class="col-lg-4 col-md-6">
+				<div class="service-item">
+					<div class="d-flex align-items-center mb-4">
+						<i class="ti-video-camera mr-3"></i>
+						<h4>Digital Marketing</h4>
+					</div>
+					<p>Lorem ipsum dolor sit amet, consect etur adipisicing elit, sed.</p>
+
+					<a href="service-single.html" class="read-more">Learn More <i class="fa fa-angle-right"></i></a>
+				</div>
+			</div>
+
+
+			<div class="col-lg-4 col-md-6">
+				<div class="service-item">
+					<div class="d-flex align-items-center mb-4">
+						<i class="ti-desktop mr-3"></i>
+						<h4>Web Design</h4>
+					</div>
+					<p>Lorem ipsum dolor sit amet, consect etur adipisicing elit, sed.</p>
+
+					<a href="service-single.html" class="read-more">Learn More <i class="fa fa-angle-right"></i></a>
+				</div>
+			</div>
+
+			<div class="col-lg-4 col-md-6">
+				<div class="service-item">
+					<div class="d-flex align-items-center mb-4">
+						<i class="ti-layers mr-3"></i>
+						<h4>Graphics Design</h4>
+					</div>
+					<p>Lorem ipsum dolor sit amet, consect etur adipisicing elit, sed.</p>
+
+					<a href="service-single.html" class="read-more">Learn More <i class="fa fa-angle-right"></i></a>
+				</div>
+			</div>
+			<div class="col-lg-4 col-md-6">
+				<div class="service-item">
+					<div class="d-flex align-items-center mb-4">
+						<i class="ti-wordpress mr-3"></i>
+						<h4>WordPress</h4>
+					</div>
+					<p>Lorem ipsum dolor sit amet, consect etur adipisicing elit, sed.</p>
+
+					<a href="" class="read-more">Learn More <i class="fa fa-angle-right"></i></a>
+				</div>
+			</div> {% endcomment %}
+
+			
+		</div>
+		<br>
+		<a href="{% url 'services:services' %}" class="btn btn-main btn-rounded">
+			View All Services <i class="fa fa-angle-right ml-2"></i></a>
+	</div>
+</section>

@@ -1,0 +1,85 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% load active_link_tags %}
+
+{{page_title}}
+
+{% block content %}
+
+<nav class="navbar navbar-expand-lg navigation header-padding site-header" id="navbar">
+    <div class="container-fluid">
+          <img src="{% static 'assets/images/logo.png' %}" alt="Rubi" class="img-fluid">
+      </a>
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarmain" aria-controls="navbarmain" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="fa fa-bars"></span>
+      </button>
+  
+      <div class="collapse navbar-collapse" id="navbarmain">
+        <ul class="navbar-nav m-auto">
+          <li class="nav-item">
+            <a class="nav-link smoth-scroll" href="{% url 'home' %}">Home</a>
+          </li>
+           <li class="nav-item"><a class="nav-link smoth-scroll" href="{% url 'blog' %}">Blog</a></li>
+        </ul>
+        <form class="form-inline my-2 my-md-0 ml-lg-4">
+          <a href="{% url 'contact' %}" class="btn btn-main btn-rounded smoth-scroll">Contact Us<i class="fa fa-angle-right ml-2"></i></a>
+        </form>
+
+      </div>
+    </div>
+</nav>
+<!-- Header Close --> 
+
+
+<section class="section" id="slider" style="box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);">
+	<div class="container-fluid">
+		<div class="row justify-content-center">
+			<div class="col-lg-10">
+				{% comment %} <div class="section-title text-center">
+					<h2 class="mb-4 text-lg">Let's Get started</h2>
+					<p>Hello there! I'm thrilled to see you on my contact page. If you have any questions, 
+						suggestions, or simply want to say hi, I'd love to hear from you. Your feedback 
+						matters to me, and I'm here to assist you in any way we can. Feel free to reach 
+						out using the contact form below, I'll get back to you as soon as possible.</p>
+				</div> {% endcomment %}
+			</div>
+		</div>
+
+		<div class="row justify-content-center">
+			<div class="col-lg-8">
+                <!--style="background:#E8E9EB;"-->
+                <div class="container">
+                    <div class="section-title">
+                        <h5 style="color:green; font-size:38px;">Successful!</h5>
+                        <br>
+                        <div style="font-size:18px; margin-top:-20px;">Thank you for reaching out to me! I truly appreciate your message and the time you've taken to connect with me.
+                            I'm dedicated to providing you with the best service possible. You can expect to hear from me as soon as possible 
+                            <hr>
+                            In the meantime, if you have any more questions or thoughts you'd like to share, please don't hesitate to reach out.
+                        </div>
+
+                        <br>
+                        <p style="color:red; font-size:15px;">
+                            <i class="fa fa-exclamation-triangle" style="font-size:19px; color:#FF3D4F;"></i> 
+                             You are about to be redirected in 30 seconds</p>
+                        
+                            <script>
+                            var timer = setTimeout(function() {
+                                window.location='{% url 'contact' %}'
+                            }, 30000);
+                        </script> 
+
+                    </div> 
+                    <div class="main-form pt-45">
+
+
+			</div>
+		</div>
+	</div>
+</section>
+
+{% include 'footer.html' %}
+
+{% endblock %}

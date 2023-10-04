@@ -1,0 +1,109 @@
+
+{% extends "base.html" %}
+{% block title %} Register Page {% endblock title%}
+{% block content %}
+
+<style>
+  .sub {
+      background:#000a2d;
+      border:1px solid #000a2d;
+  }
+  .sub:hover {
+      background:#FF3D4F;
+      border:1px solid #FF3D4F; 
+  }
+</style>
+
+{% include 'navbar.html' %}
+
+
+<!-- Section: Design Block -->
+<section class="text-center">
+    <!-- Background image -->
+    <div class="p-5 bg-image" style="
+          background-image: url('https://mdbootstrap.com/img/new/textures/full/171.jpg');
+          height: 300px;
+          "></div>
+    <!-- Background image -->
+  
+    <div class="card mx-4 mx-md-5 shadow-5-strong" style="
+          margin-top: -100px;
+          background: hsla(0, 0%, 100%, 0.8);
+          backdrop-filter: blur(30px);
+          ">
+      <div class="card-body py-5 px-md-5">
+  
+        <div class="row d-flex justify-content-center">
+          <div class="col-lg-8">
+
+               <span> <img class="rounded-circle account-img" src="{{ user.profile.avatar.url }} " style="cursor: pointer;"/>
+                <h2 class="fw-bold mb-5"> 
+                    <span style="text-transform:capitalize;">&nbsp;&nbsp; {{user}} </span></h2>
+                </span>
+            
+            
+            <form method="POST">
+                {% csrf_token %}
+                                {% if form.errors %}
+                                    <div class="alert alert-danger alert-dismissible" role="alert">
+                                        <div id="form_errors">
+                                            {% for key, value in form.errors.items %}
+                                                <strong>{{ value }}</strong>
+                                            {% endfor %}
+                                        </div>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                {% endif %}
+
+              <!-- 2 column grid layout with text inputs for the first and last names -->
+              <div class="row">
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    {{ user_form.username }}
+                    <label class="small mb-1">Username:</label>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    {{ user_form.email }}
+                    <label class="small mb-1">Email:</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <a href="{% url 'password_change' %}" class="btn btn-primary">Change Password</a>
+                <hr style="border: 1px solid #fff;">
+               <hr style="padding-top:15px;">
+                <label class="medium mb-1">Change Profile Image:</label>
+                {{ profile_form.avatar }}
+            </div>
+
+            <hr style="border: 1px solid #fff;">
+            <hr>
+              <!-- Bio input -->
+              <div class="form-outline mb-4">
+                <label class="medium mb-1">Bio / About:</label> {{ profile_form.bio }}
+                </div>
+  
+              <!-- Submit button -->
+              <button type="submit" class="btn btn-primary btn-block sub mb-2">
+                Save Changes </button>
+
+            <!-- Rest button -->
+            <button type="reset" class="btn btn-primary btn-block mb-4">
+                Reset </button>
+ 
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Section: Design Block -->
+
+{% include 'footer.html' %}
+{% endblock content %}

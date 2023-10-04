@@ -1,0 +1,75 @@
+
+{% extends 'base.html' %} {% load socialaccount %} {% providers_media_js %}
+{% load static %}
+{% load active_link_tags %}
+
+{{page_title}}
+
+{% block content %}
+
+{% include 'navbar.html' %}
+{% include 'slider.html' %}
+{% include 'about.html' %} 
+{% include 'specialized.html' %}
+{% include 'home_services.html' %}
+{% comment %} {% include 'competence.html' %} {% endcomment %}
+{% include 'records.html' %}
+{% include 'experience.html' %}
+
+<br><br>
+{% include 'solution.html' %}
+{% include 'home_blog.html' %}
+{% comment %} {% include 'contact.html' %} {% endcomment %}
+
+
+<!-----------FOR DEFAULT LOGIN--------------->
+{% comment %} {% if user.is_authenticated %}
+    <h3>Welcome {{ user.username }} !!!</h3>
+    <br /><br />
+    <a href="{% url 'account_logout' %}" class="btn btn-danger">Logout</a>
+
+    {% else %}
+
+    <!-- GitHub button starts here -->
+    <a href="{% provider_login_url 'github' %}" class="btn btn-secondary">
+      <i class="fa fa-github fa-fw"></i>
+      <span>Login with GitHub</span>
+    </a>
+    <!-- End-GitHub button starts here -->
+
+
+ <!-- Twitter button starts here -->
+</a>
+<a href="{% provider_login_url 'twitter' %}" class="btn btn-primary">
+  <i class="fa fa-twitter fa-fw"></i>
+  <span>Login with Twitter</span>
+</a>
+<!-- Twitter button ends here -->
+
+
+<!-----Google button starts here------->
+<a href="{% provider_login_url 'google' %}" class="btn btn-danger">
+<i class="fa fa-google fa-fw"></i>
+<span>Login With Google</span>
+</a>
+
+
+<a href="{% provider_login_url 'facebook' %}">Facebook Login</a> {% endcomment %}
+
+
+{% comment %} {% endif %} {% endcomment %}
+
+
+
+<!-----------FOR CUSTOMIZED LOGIN--------------->
+{% comment %} {% if user.is_authenticated %}
+  <a href="{% url 'users-profile' %}" class="nav-item nav-link">Profile</a>
+  <a href="{% url 'logout' %}" class="nav-item nav-link">Logout</a>
+{% else %}
+  <a href="{% url 'login' %}" class="nav-item nav-link">Sign in</a>
+{% endif %} {% endcomment %}
+  
+
+{% include 'footer.html' %}
+
+{% endblock %}

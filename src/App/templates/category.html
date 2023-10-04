@@ -1,0 +1,218 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load active_link_tags %}
+{% load widget_tweaks %}
+
+{{page_title}}
+
+{% block content %}
+
+<style>
+	.category button{
+		background:#E8E9EB;
+		border:1.5px solid #F5F5F5;
+		border-radius:7px;
+	}
+
+	.category button:hover{
+		background:#FF3D4F;
+		color:#fff;
+		transition:0.5s;
+	}
+   
+</style>
+
+
+{% comment %} 
+<nav class="navbar navbar-expand-lg navigation header-padding site-header" id="navbar">
+    <div class="container-fluid">
+          <img src="{% static 'assets/images/logo.png' %}" alt="Rubi" class="img-fluid">
+      </a>
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarmain" aria-controls="navbarmain" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="fa fa-bars"></span>
+      </button>
+  
+      <div class="collapse navbar-collapse" id="navbarmain">
+        <ul class="navbar-nav m-auto">
+          <li class="nav-item"><a class="nav-link smoth-scroll" href="{% url 'home' %}">Home</a></li>
+           <li class="nav-item"><a class="nav-link smoth-scroll active" href="{% url 'blog' %}" style="background:#FF3D4F; color:#fff;">Blog <span class="sr-only">(current)</span></a></li>
+        </ul>
+		
+        <form class="form-inline my-2 my-md-0 ml-lg-4">
+          <a href="{% url 'contact' %}" class="btn btn-main btn-rounded smoth-scroll">Contact Us<i class="fa fa-angle-right ml-2"></i></a>
+        </form>
+
+      </div>
+    </div>
+</nav>
+<!-- Header Close -->  {% endcomment %}
+
+{% include 'navbar.html' %}
+
+<div style="background:#f7f7f8;">
+	<section class="page-title bg-2" id="slider">
+		<div class="container-fluid" style="width:95%;">
+		  <div class="row align-items-center">
+			<div class="col-lg-7">
+				<h1> {{category}}</h1>
+				<p>Dive into the dynamic world of Python Django development and explore how developers 
+					leverage their expertise to create a wide range of applications. From crafting 
+					e-commerce platforms to building social media websites, blogs, service-based 
+					applications, and even desktop tools.</p>
+			</div>
+	  
+			<div class="col-lg-5">
+			  <ul class="list-inline header-breadcumb text-lg-right mt-5 mt-lg-0">
+				<li class="list-inline-item"><a href="{% url 'home' %}">Home</a></li>
+				<li class="list-inline-item">/</li>
+				<li class="list-inline-item">Blog</li>
+			  </ul>
+			</div>
+		  </div>
+		</div>
+	  </section>
+	  <br>
+	  <br>
+
+<section class="section" id="slider" style="background:#f8f9fa;">
+	<div class="container-fluid" style="width:90%;">
+		<div class="row justify-content-center">
+			<div class="col-lg-12">
+				<div class="section-title text-center">
+					<h2 class="mb-4 text-lg" style="margin-top:-50px;"></h2>
+					
+					{% comment %} <p>Dive into the dynamic world of Python Django development and explore how developers leverage their 
+						expertise to create a wide range of applications. From crafting e-commerce platforms to building 
+						social media websites, blogs, service-based applications, and even desktop tools.  {% endcomment %}
+						
+						{% comment %} Python Django developers are the architects of innovative and user-friendly digital experiences. Learn how we 
+						streamline workflows, automate repetitive tasks, and make a lasting impact in the realm of web 
+						and application development. {% endcomment %}
+						
+
+						<!---------------CATEGORY--------------->
+						<div class="container-fluid category text-center" style="margin-top:-140px; margin-bottom:30px; padding:20px;">
+							{% for category in category_list %}
+								<a href="/category/{{ category.name}}">
+									<button class="course_button text-center mr-2 mb-2 padding-bottom:25px !important;">
+										<span style="font-size:13px;"><i class="fa fa-laptop"></i> {{ category.name|title }}</span>
+										<span class="button_arrow">
+											<i class="fa fa-angle-right" aria-hidden="true"></i>
+										</span>
+									</button>
+								</a>
+							{% endfor %}
+
+					</p>
+				</div>
+
+
+
+				<!--------SEARCH FORM-------->
+				<form action="{% url 'search_results' %}" class="search-form" role="search" style="margin-top:-40px; margin-bottom:40px;">
+					{% csrf_token %}
+	
+					<div class="input-group">
+					  <input type="text" class="form-control input-lg" name="q" placeholder="Search Blog...">
+					  <span class="input-group-btn">
+						<button class="btn btn-success btn-lg" type="submit" style="background:#FF3D4F; border:1px solid #FF3D4F;">
+							<span style="font-size:17px; cursor:pointer;"><i class="fa fa-search"></i> Search</span></button>
+					  </span>
+					</div>
+				  </form>
+
+				
+				  <!--FILTER COURSES WITH COURSE NAME WHICH IS "TITLE"-->
+				<div style="margin-bottom:60px; margin-top:-20px;">
+					<form method="get">
+						{% csrf_token %}
+						{% render_field form.blog_name class="form-control" name="blog_name" type="text" %}
+						<button type="submit" class="btn bg-gradient-primary w-100 my-1 mb-1 blog-btn" 
+							style="cursor:pointer; font-size:13.6px; font-weight:bold;">
+							<i class="fa fa-send-o" style="font-size:13.6px;"></i> 
+								FILTER Blog
+						</button>
+					</form>
+				</div>
+				<!--END-->
+				
+
+			</div>
+		</div>
+
+        <div class="containerr-fluid" style="width:97%;">
+		<div class="row">
+			{% for obj in page %}
+				
+				<div class="col-lg-4 col-md-6 ">
+					<div class="blog-item mb-5 mb-lg-12">
+						<a href="{{obj.get_absolute_url}}" >
+						<img src="{{obj.image.url}}" alt="" class="img-fluid">
+						<div class="content mt-4">
+
+							<span class="timecount" style="color:#FF3D4F;">
+								<i class="ti-comments mr-3"></i>
+								{{obj.cate_name}}
+							</span>
+
+							<h4 class="mb-3 mt-2"><a href="{{obj.get_absolute_url}}">{{obj.title}}</a></h4>
+							<p>{{obj.overview|safe|truncatechars:110}}</p>
+							
+							<a href="{{obj.get_absolute_url}}" class="btn btn-dark">Read More <i class="ti-angle-right"></i></a>
+						</div>
+					</div>
+				</a>
+				</div>
+				{% endfor %}
+            </div>
+
+		</div>
+	</section>
+
+
+	<!-- PAGINATION STARTS HERE-->
+	<div class="container-fluid text-center" style="margin-bottom:-110px; margin-top:-66px;  width:90%;">
+        <nav aria-label="Page navigation example">
+         <ul class="pagination">
+
+           {% if page.has_previous %}
+           <li class="page-item" style="color:#000;">
+             <a class="page-link" href="?page={{page.previous_page_number}}" style="color:#000; background:#98FB98;"
+               >Previous</a>
+           </li>
+           {% else %}
+           <li class="page-item disabled" style="color:#000;">
+             <a class="page-link" href="#" style="background:#E5E4E2;">Previous</a>
+           </li>
+           {% endif %}
+     
+           {% for i in page.paginator.page_range %} 
+           {% if page.number == i %}
+     
+               <li class="page-item"  style="color:#000;">
+                   <a class="page-link active" style="background:#FF3D4F; color:#fff;">{{ i }}</a></li>
+           {% else %}
+               <li class="page-item">
+               <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+               </li>
+           {% endif %} 
+           {% endfor %} 
+           
+           {% if page.has_next %}
+     
+               <li class="page-item" style="color:#000;">
+               <a href="?page={{page.next_page_number}}" class="page-link" style="color:#000; background:#98FB98;"
+                   >Next</a>
+               </li>
+           {% else %}
+               <li class="page-item disabled"  style="color:#000;">
+               <a class="page-link" style="background:#E5E4E2;">Next</a>
+               </li>
+           {% endif %}
+          </div>
+	
+
+{% include 'footer.html' %}
+
+{% endblock %}
