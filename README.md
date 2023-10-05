@@ -42,9 +42,9 @@ You can now access the project by navigating to the provided server address in y
 
 
 
-==================================================================================
+---------------------------------------------------------------------------------
 IMAGES FROM THE PORTFOLIO
-==================================================================================
+---------------------------------------------------------------------------------
 
 ![tag-page-2](https://github.com/sancy1/Advance-Portfolio/assets/143714093/08f2e485-dc49-4632-85c6-72c4339e533f)
 ![tag-page](https://github.com/sancy1/Advance-Portfolio/assets/143714093/747e06da-bb97-482b-83fd-31a49d237ff2)
